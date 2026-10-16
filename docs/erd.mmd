@@ -1,0 +1,67 @@
+erDiagram
+    BOOKING_AGENT ||--o{ RESERVATION : handles
+    PASSENGER ||--o{ RESERVATION : main_passenger
+    RESERVATION ||--o{ RESERVATION_PAYMENT : has
+    PAYMENT ||--o{ RESERVATION_PAYMENT : linked
+    RESERVATION ||--o{ RESERVATION_LEG : includes
+    FLIGHT_LEG ||--o{ RESERVATION_LEG : booked_on
+    FLIGHT_SCHEDULE ||--o{ FLIGHT_LEG : has
+    AIRPORT ||--o{ FLIGHT_SCHEDULE : origin
+    AIRPORT ||--o{ FLIGHT_SCHEDULE : destination
+    AIRPORT ||--o{ FLIGHT_LEG : leg_origin
+    AIRPORT ||--o{ FLIGHT_LEG : leg_destination
+    FLIGHT_SCHEDULE ||--o{ FLIGHT_COST : priced_by
+    CALENDAR_DATE ||--o{ FLIGHT_COST : validity_start
+    CALENDAR_DATE ||--o{ FLIGHT_COST : validity_end
+    BOOKING_AGENT {
+      int agent_id PK
+      varchar agent_name
+    }
+    PASSENGER {
+      int passenger_id PK
+      varchar first_name
+      varchar last_name
+      varchar email_address
+    }
+    RESERVATION {
+      bigint reservation_id PK
+      int main_passenger_id FK
+      int agent_id FK
+      varchar reservation_code UK
+      int party_size
+    }
+    PAYMENT {
+      bigint payment_id PK
+      decimal payment_amount
+    }
+    RESERVATION_PAYMENT {
+      bigint reservation_id PK, FK
+      bigint payment_id PK, FK
+    }
+    AIRPORT {
+      char airport_code PK
+      varchar airport_name
+    }
+    FLIGHT_SCHEDULE {
+      varchar flight_number PK
+      char origin_airport_code FK
+      char destination_airport_code FK
+    }
+    FLIGHT_LEG {
+      bigint leg_id PK
+      varchar flight_number FK
+    }
+    RESERVATION_LEG {
+      bigint reservation_id PK, FK
+      bigint leg_id PK, FK
+    }
+    CALENDAR_DATE {
+      date calendar_date PK
+    }
+    FLIGHT_COST {
+      varchar flight_number PK, FK
+      varchar aircraft_type_code PK
+      date valid_from_date PK, FK
+      date valid_to_date FK
+      decimal cost_amount
+    }
