@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-success text-white">
+        <h4>Create Reservation</h4>
+    </div>
+    <div class="card-body">
+        <form method="POST" action="/reservations/create">
+            <div class="mb-3">
+                <label>Main Passenger*</label>
+                <select name="passenger_id" class="form-select" required>
+                    {% for p in passengers %}
+                    <option value="{{ p.passenger_id }}">{{ p.name }} (ID #{{ p.passenger_id }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label>Booking Agent (Optional)</label>
+                <select name="agent_id" class="form-select">
+                    <option value="">Direct Booking (No Agent)</option>
+                    {% for a in agents %}
+                    <option value="{{ a.agent_id }}">{{ a.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label>Status Code</label>
+                    <select name="reservation_status_code" class="form-select">
+                        <option value="CONF">CONF (Confirmed)</option>
+                        <option value="PEND">PEND (Pending)</option>
+                        <option value="CANC">CANC (Cancelled)</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Ticket Type</label>
+                    <select name="ticket_type_code" class="form-select">
+                        <option value="ECO">ECO (Economy)</option>
+                        <option value="BUS">BUS (Business)</option>
+                        <option value="FIR">FIR (First Class)</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label>Party Size*</label>
+                    <input type="number" name="number_in_party" class="form-control" value="1" min="1" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Create Reservation</button>
+            <a href="/reservations" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

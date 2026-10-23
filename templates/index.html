@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container pb-5">
+    <!-- Hero Section -->
+    <div class="p-5 mb-4 bg-dark text-white rounded-3 shadow-sm position-relative overflow-hidden" 
+         style="background: linear-gradient(135deg, #0d6efd 0%, #0a3663 100%);">
+        <div class="row align-items-center py-2">
+            <div class="col-md-8">
+                <span class="badge bg-light text-primary fw-bold mb-2 text-uppercase tracking-wider">Internal Operations</span>
+                <h1 class="display-5 fw-bold mb-2">HarborWing Air Operations Portal</h1>
+                <p class="fs-5 text-light opacity-90 mb-4">
+                    Manage passengers, flight schedules, bookings, payments, and airport networks seamlessly.
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                    <a href="/reservations/create" class="btn btn-warning text-dark fw-bold px-4 py-2">
+                        + New Reservation
+                    </a>
+                    <a href="/passengers/create" class="btn btn-outline-light px-4 py-2">
+                        + Register Passenger
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 text-center d-none d-md-block opacity-25">
+                <span style="font-size: 8rem;">✈️</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Dashboard Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+        <h4 class="fw-bold text-secondary m-0">Core Modules & Operations</h4>
+        <small class="text-muted">HarborWing Air CRUD Database System</small>
+    </div>
+
+    <!-- Feature Grid Cards -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        
+        <!-- Passengers Module -->
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-primary bg-opacity-10 p-3 text-primary me-3">
+                            👥
+                        </div>
+                        <h5 class="card-title fw-bold m-0">Passengers</h5>
+                    </div>
+                    <p class="card-text text-muted small">
+                        View, search, update, or register new passengers in the HarborWing customer database.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <a href="/passengers" class="btn btn-sm btn-outline-primary fw-semibold">View All Passengers &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reservations Module -->
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-success bg-opacity-10 p-3 text-success me-3">
+                            🎫
+                        </div>
+                        <h5 class="card-title fw-bold m-0">Reservations</h5>
+                    </div>
+                    <p class="card-text text-muted small">
+                        Manage active flight bookings, link flight legs, process payments, and modify ticket statuses.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <a href="/reservations" class="btn btn-sm btn-outline-success fw-semibold">Manage Bookings &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Airports Module -->
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-info bg-opacity-10 p-3 text-info me-3">
+                            🛫
+                        </div>
+                        <h5 class="card-title fw-bold m-0">Airports</h5>
+                    </div>
+                    <p class="card-text text-muted small">
+                        Browse the active airport directory, location codes, and destination hubs.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <a href="/airports" class="btn btn-sm btn-outline-info fw-semibold">View Airport List &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Agents Module -->
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-warning bg-opacity-10 p-3 text-warning me-3">
+                            🏢
+                        </div>
+                        <h5 class="card-title fw-bold m-0">Booking Agents</h5>
+                    </div>
+                    <p class="card-text text-muted small">
+                        Access partner agency accounts and assigned agent IDs responsible for reservations.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <a href="/agents" class="btn btn-sm btn-outline-warning text-dark fw-semibold">Manage Agents &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payments Module -->
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm hover-shadow transition">
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-secondary bg-opacity-10 p-3 text-secondary me-3">
+                            💳
+                        </div>
+                        <h5 class="card-title fw-bold m-0">Payments</h5>
+                    </div>
+                    <p class="card-text text-muted small">
+                        Inspect payment transactions, methods, and links associated with passenger reservations.
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <a href="/payments" class="btn btn-sm btn-outline-secondary fw-semibold">View Payment Log &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

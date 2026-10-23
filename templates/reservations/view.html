@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h3>Reservation #{{ reservation.reservation_id }}</h3>
+                <span class="badge bg-light text-dark">{{ reservation.reservation_status_code }}</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Passenger:</strong> {{ reservation.passenger_name }} ({{ reservation.email_address }})</p>
+                        <p><strong>Booking Agent:</strong> {{ reservation.agent_name or 'Direct Booking' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Party Size:</strong> {{ reservation.number_in_party }}</p>
+                        <p><strong>Travel Class:</strong> {{ reservation.travel_class_code }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- LINKED FLIGHT LEGS -->
+    <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5>Linked Flight Legs</h5>
+            </div>
+            <div class="card-body">
+                <form action="/reservations/{{ reservation.reservation_id }}/add_leg" method="POST" class="mb-3">
+                    <div class="input-group">
+                        <select name="leg_id" class="form-select" required>
+                            {% for l in all_legs %}
+                            <option value="{{ l.leg_id }}">Leg #{{ l.leg_id }} - {{ l.scheduled_flight }} ({{ l.origin_airport }} -> {{ l.destination_airport }})</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-outline-primary" type="submit">Link Leg</button>
+                    </div>
+                </form>
+
+                <ul class="list-group">
+                    {% for leg in legs %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Leg #{{ leg.leg_id }}</strong> - Flight {{ leg.scheduled_flight }}
+                            <br><small class="text-muted">{{ leg.origin_airport }} to {{ leg.destination_airport }}</small>
+                        </div>
+                        <form action="/reservations/{{ reservation.reservation_id }}/remove_leg/{{ leg.leg_id }}" method="POST">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Unlink Leg</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="list-group-item text-muted">No flight legs linked yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- LINKED PAYMENTS -->
+    <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-dark text-white">
+                <h5>Linked Payments</h5>
+            </div>
+            <div class="card-body">
+                <form action="/reservations/{{ reservation.reservation_id }}/add_payment" method="POST" class="mb-3">
+                    <div class="input-group">
+                        <select name="payment_id" class="form-select" required>
+                            {% for pay in all_payments %}
+                            <option value="{{ pay.payment_id }}">Payment #{{ pay.payment_id }} - ${{ pay.payment_amount }} ({{ pay.payment_status_code }})</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-outline-success" type="submit">Link Payment</button>
+                    </div>
+                </form>
+
+                <ul class="list-group">
+                    {% for pay in payments %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Payment #{{ pay.payment_id }}</strong> - ${{ pay.payment_amount }}
+                            <br><small class="text-muted">Status: {{ pay.payment_status_code }}</small>
+                        </div>
+                        <form action="/reservations/{{ reservation.reservation_id }}/remove_payment/{{ pay.payment_id }}" method="POST">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Unlink Payment</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="list-group-item text-muted">No payments linked yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

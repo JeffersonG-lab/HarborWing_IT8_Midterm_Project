@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Airports</h2>
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Airport Code</th>
+                <th>Airport Name</th>
+                <th>City</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for airport in airports %}
+            <tr>
+                <td>{{ airport.airport_code }}</td>
+                <td>{{ airport.airport_name }}</td>
+                <td>{{ airport.city }}</td>
+                <td>{{ airport.country }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
